@@ -147,7 +147,7 @@ namespace TicTacToe_Kata
                 {//TODO add interface to differentiate between game/round for advanced
                     //This means that three crosses were found in a row
                     //Crosses are a positive 1, so when you add a row of the board, and the outcome is equal to the board size this must be a win condition.
-                    Console.Out.WriteLine("Crosses have won the game!");
+                    Console.Out.WriteLine("Noughts have won the game!");
                     return true;
                 }
 
@@ -155,7 +155,7 @@ namespace TicTacToe_Kata
                 {
                     //This means that three crosses were found in a row
                     //Crosses are a positive 1, so when you add a row of the board, and the outcome is equal to the board size this must be a win condition.
-                    Console.Out.WriteLine("Noughts have won the game!");
+                    Console.Out.WriteLine("Crosses have won the game!");
                     return true;
                 }
 
@@ -175,7 +175,7 @@ namespace TicTacToe_Kata
                 {//TODO add interface to differentiate between game/round for advanced
                     //This means that three crosses were found in a row
                     //Crosses are a positive 1, so when you add a row of the board, and the outcome is equal to the board size this must be a win condition.
-                    Console.Out.WriteLine("Crosses have won the game!");
+                    Console.Out.WriteLine("Noughts have won the game!");
                     return true;
                 }
 
@@ -183,7 +183,7 @@ namespace TicTacToe_Kata
                 {
                     //This means that three crosses were found in a row
                     //Crosses are a positive 1, so when you add a row of the board, and the outcome is equal to the board size this must be a win condition.
-                    Console.Out.WriteLine("Noughts have won the game!");
+                    Console.Out.WriteLine("Crosses have won the game!");
                     return true;
                 }
 
@@ -198,13 +198,13 @@ namespace TicTacToe_Kata
 
             if (check == board.Size)
             {
-                Console.Out.WriteLine("Crosses have won the game!");
+                Console.Out.WriteLine("Noughts have won the game!");
                 return true;
             }
             
             if (check == -board.Size)
             {
-                Console.Out.WriteLine("Noughts have won the game!");
+                Console.Out.WriteLine("Crosses have won the game!");
                 return true;
             }
             
@@ -215,13 +215,13 @@ namespace TicTacToe_Kata
 
             if (check == board.Size)
             {
-                Console.Out.WriteLine("Crosses have won the game!");
+                Console.Out.WriteLine("Noughts have won the game!");
                 return true;
             }
             
             if (check == -board.Size)
             {
-                Console.Out.WriteLine("Noughts have won the game!");
+                Console.Out.WriteLine("Crosses have won the game!");
                 return true;
             }
             

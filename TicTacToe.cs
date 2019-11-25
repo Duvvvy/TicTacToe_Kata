@@ -20,32 +20,59 @@ namespace TicTacToe_Kata
         
         private void InitialisePlayers()
         {
+            bool validInput = false;
+            while (!validInput)
+            {
+                Console.Out.WriteLine("Would you like to play against a 'human' or a 'bot");
+                var userInput = Console.ReadLine();
+                switch (userInput)
+                {
+                    case "human":
+                    {
+                        Console.Out.WriteLine("You have chosen human!");
+                        validInput = true;
+                        var playerOne = new Player("Player one", false);
+                        var playerTwo = new Player("Player two", false);
+                        _players.Add(playerOne);
+                        _players.Add(playerTwo);
+                        break;
+                    }
+                    case "bot":
+                    {
+                        Console.Out.WriteLine("You have chosen BOT!");
+                        var playerOne = new Player("Player one", false);
+                        var playerTwo = new Player("Random Bot", true);
+                        _players.Add(playerOne);
+                        _players.Add(playerTwo);
+                        validInput = true;
+                        break;
+                    }
+                }
+            }
             
-            var playerOne = new Player("Player one");
-            var playerTwo = new Player("Player two");
+            
 
-            _players.Add(playerOne);
-            _players.Add(playerTwo);
+            
 
             foreach (var player in _players)
             {
                 Controller.DecideNoughtsOrCrosses(player);
             }
 
-            if (playerOne.CompareTo(playerTwo))
+            if (_players[0].CompareTo(_players[1]))
             {
                 Console.Out.WriteLine("Sorry you have both chosen the same piece, player one will now decide");
-                Controller.DecideNoughtsOrCrosses(playerOne);
+                Controller.DecideNoughtsOrCrosses(_players[0]);
                 
-                switch (playerOne.Type)
+                switch (_players[0].Type)
                 {
                     case -1:
-                        playerOne.Type = -1;
-                        playerTwo.Type = 1;
+                        _players[0].Type = -1;
+                        _players[1].Type = 1;
                         break;
                     case 1:
-                        playerOne.Type = 1;
-                        playerTwo.Type = -1;
+                        _players[0].Type = 1;
+                        _players[1].Type = -1;
                         break;
                 }
                 
@@ -79,7 +106,7 @@ namespace TicTacToe_Kata
             DisplayBoard(Board);
             Console.Out.WriteLine("Please make your move " + player.Name);
 
-            bool validMove = false;
+            var validMove = false;
             while (!validMove)
             {
                 validMove = ValidateMove(Board, Controller.GetMove(player));
@@ -88,7 +115,6 @@ namespace TicTacToe_Kata
                     Console.Out.WriteLine("Sorry that is an invalid move, please make sure you are not trying to overwrite a previous move and that the coordinates you have entered are inside the board.");
                 }
             }
-            
             
             if (IsWinner(Board, player))
             {

@@ -9,7 +9,7 @@ namespace TicTacToe_Kata
 {
     public class Controller
     {
-        
+        public static Random Random = new Random(System.DateTime.Now.Millisecond * System.DateTime.Now.Second);
 
         public Controller()
         {
@@ -42,6 +42,11 @@ namespace TicTacToe_Kata
         
         public Move GetMove(Player player)
         {//Make sure input is bigger than 0
+            //If player is a BOT,
+            if (player.isBot)
+            {
+                return BotMove(player);
+            }
             Console.Out.WriteLine("Where do you want to play?");
             Console.Out.WriteLine("Enter two numbers separately, [x][y] coordinates");
 
@@ -56,6 +61,14 @@ namespace TicTacToe_Kata
             list.Add(y);
             
             return new Move(x, y, player.Type);
+        }
+        public Move BotMove(Player player)
+        {//TODO allow multiple board sizes
+            int x = Random.Next(0, 3);
+            int y = Random.Next(0, 3);
+            Console.Out.WriteLine("x: "+x);
+            Console.Out.WriteLine("y: "+y);
+            return new Move(x,y,player.Type);
         }
         
 

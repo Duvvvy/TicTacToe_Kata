@@ -9,10 +9,9 @@ namespace TicTacToe_Kata
          * 
          */
 
-        public int X { get; set; }
-        public int Y { get; set; }
-        
-        public int Type { get; set; }
+        public int X { get; }
+        public int Y { get; }
+        public int Type { get; }
 
         public Move(int x, int y, int type)
         {

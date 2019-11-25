@@ -5,12 +5,10 @@ namespace TicTacToe_Kata
 {
     public class TicTacToe
     {
-        
-        private Player CurrentPlayer { get; set; }
         private int GameType { get; set; }//Ready for 3d
         private Board Board { get; set; }
-        public List<Player> Players = new List<Player>();
-        public Controller Controller { get; set; }
+        private readonly List<Player> _players = new List<Player>();
+        private Controller Controller { get; set; }
 
 
         public TicTacToe()
@@ -23,14 +21,13 @@ namespace TicTacToe_Kata
         private void InitialisePlayers()
         {
             
-            Player playerOne = new Player("Player one");
-            Player playerTwo = new Player("Player two");
+            var playerOne = new Player("Player one");
+            var playerTwo = new Player("Player two");
 
-            Players.Add(playerOne);
-            Players.Add(playerTwo);
-            //TODO change players array to list
+            _players.Add(playerOne);
+            _players.Add(playerTwo);
 
-            foreach (var player in Players)
+            foreach (var player in _players)
             {
                 Controller.DecideNoughtsOrCrosses(player);
             }
@@ -42,14 +39,14 @@ namespace TicTacToe_Kata
                 
                 if (playerOne.CompareTo(playerTwo))
                 {
-                    if (playerOne.Type == 'x')
+                    switch (playerOne.Type)
                     {
-                        playerTwo.Type = 'o';
-                    }
-
-                    if (playerOne.Type == 'o')
-                    {
-                        playerTwo.Type = 'x';
+                        case 'x':
+                            playerTwo.Type = 'o';
+                            break;
+                        case 'o':
+                            playerTwo.Type = 'x';
+                            break;
                     }
                 }
                 Console.Out.WriteLine("Thank you for your understanding and cooperation :)");
@@ -62,7 +59,7 @@ namespace TicTacToe_Kata
             int currentPlayer = 0;
             while (stillPlaying)
             {
-                stillPlaying = PlayTurn(Players[currentPlayer]);
+                stillPlaying = PlayTurn(_players[currentPlayer]);
 
                 if (currentPlayer == 0)
                 {
@@ -77,17 +74,19 @@ namespace TicTacToe_Kata
             Console.Out.WriteLine("Thanks for playing!");
         }
 
-        public bool PlayTurn(Player player)
+        private bool PlayTurn(Player player)
         {
             DisplayBoard(Board);
             Console.Out.WriteLine("Please make your move " + player.Name);
-            CurrentPlayer = player;
 
-            //TODO add error message for player overwriting board
             bool validMove = false;
             while (!validMove)
             {
                 validMove = ValidateMove(Board, Controller.GetMove(player));
+                if (validMove == false)
+                {
+                    Console.Out.WriteLine("Sorry that is an invalid move, please make sure you are not trying to overwrite a previous move and that the coordinates you have entered are inside the board.");
+                }
             }
             
             
@@ -96,8 +95,8 @@ namespace TicTacToe_Kata
                 return false;
             }
                     
-            if (Board.TurnsInCurrentRound >= Board.Size * Board.Size)
-            {//TODO turn into function
+            if (IsDraw(Board))
+            {
                 Console.Out.WriteLine("The board is full");
                 return false;
             }
@@ -111,16 +110,15 @@ namespace TicTacToe_Kata
             Board.Create(3,1);
         }
 
-        
 
-        public void DisplayBoard(Board board)
+        private static void DisplayBoard(Board board)
         {
             board.DisplayBoard();
         }
 
-        public bool ValidateMove(Board board, Move move)
+        private static bool ValidateMove(Board board, Move move)
         {
-            if (move.X <= board.Size && move.Y <= board.Size)//TODO check bounds
+            if (move.X < board.Size && move.Y < board.Size)
             {
                 if (board.GameBoard[move.X,move.Y] != -1 && board.GameBoard[move.X,move.Y] != 1)
                 {//Problem, these can be null and therefore will throw an exception
@@ -133,11 +131,10 @@ namespace TicTacToe_Kata
             return false;
         }//Dont modify move
 
-        
 
-        public bool IsWinner(Board board, Player player)
+        private static bool IsWinner(Board board, Player player)
         {//TODO Clean this up, DRY
-                        int check = 0;
+            int check = 0;
             //Check horizontals
             for (int i = 0; i < board.Size; i++)
             {
@@ -232,14 +229,9 @@ namespace TicTacToe_Kata
             return false;
         }
 
-        public bool IsDraw(Board board)
+        private static bool IsDraw(Board board)
         {
-            if (board.TurnsInCurrentRound == (board.Size * board.Size))
-            {
-                return true;
-            }
-
-            return false;
+            return board.TurnsInCurrentRound == (board.Size * board.Size);
         }
     }
 }

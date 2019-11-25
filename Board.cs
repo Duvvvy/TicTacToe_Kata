@@ -9,8 +9,7 @@ namespace TicTacToe_Kata
         /*
          * Stores data about pieces, size of board and dimensions (3d etc)
          */
-        public int Size { get; set; }
-
+        public int Size { get; private set; }
         private int Dimensions { get; set; }
         public int[,] GameBoard { get; set; }
         public int TurnsInCurrentRound { get; set; }

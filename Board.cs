@@ -44,13 +44,13 @@ namespace TicTacToe_Kata
                     switch (GameBoard[i, j])
                     {
                         case -1:
-                            Console.Out.Write(" X ");
+                            Console.Out.Write("  [X]  ");
                             break;
                         case 1:
-                            Console.Out.Write(" O ");
+                            Console.Out.Write("  [O]  ");
                             break;
                         case 0:
-                            Console.Out.Write(" _ ");
+                            Console.Out.Write(" [{0},{1}] ",i,j);
                             break;
                     }
                 }

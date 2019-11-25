@@ -37,18 +37,18 @@ namespace TicTacToe_Kata
                 Console.Out.WriteLine("Sorry you have both chosen the same piece, player one will now decide");
                 Controller.DecideNoughtsOrCrosses(playerOne);
                 
-                if (playerOne.CompareTo(playerTwo))
+                switch (playerOne.Type)
                 {
-                    switch (playerOne.Type)
-                    {
-                        case 'x':
-                            playerTwo.Type = 'o';
-                            break;
-                        case 'o':
-                            playerTwo.Type = 'x';
-                            break;
-                    }
+                    case -1:
+                        playerOne.Type = -1;
+                        playerTwo.Type = 1;
+                        break;
+                    case 1:
+                        playerOne.Type = 1;
+                        playerTwo.Type = -1;
+                        break;
                 }
+                
                 Console.Out.WriteLine("Thank you for your understanding and cooperation :)");
             }
         }

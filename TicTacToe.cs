@@ -70,7 +70,7 @@ namespace TicTacToe_Kata
                     currentPlayer = 0;
                 }
             }
-            
+            DisplayBoard(Board);
             Console.Out.WriteLine("Thanks for playing!");
         }
 

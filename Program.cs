@@ -10,12 +10,10 @@ namespace TicTacToe_Kata
 
             Console.Out.WriteLine("Welcome to tic tac toe/ noughts and crosses");
             Console.Out.WriteLine("How many games would you like to play?");
-            string userInput = Console.ReadLine();
+            var userInput = Convert.ToInt32(Console.ReadLine());
 
             Console.Out.WriteLine("Well, let's try just doing one.");
             controller.StartGame();
-            
-
         }
     }
 }

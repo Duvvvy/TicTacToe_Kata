@@ -8,13 +8,13 @@ namespace TicTacToe_Kata
         private int GameType { get; set; }//Ready for 3d
         private Board Board { get; set; }
         private readonly List<Player> _players = new List<Player>();
-        private Controller Controller { get; set; }
+        private CLI Cli { get; set; }
 
 
         public TicTacToe()
         {
             CreateBoard();
-            Controller = new Controller();
+            Cli = new CLI();
             InitialisePlayers(); 
         }
         
@@ -29,13 +29,13 @@ namespace TicTacToe_Kata
 
             foreach (var player in _players)
             {
-                Controller.DecideNoughtsOrCrosses(player);
+                Cli.DecideNoughtsOrCrosses(player);
             }
 
             if (playerOne.CompareTo(playerTwo))
-            {
+            {//TODO move this into CLI
                 Console.Out.WriteLine("Sorry you have both chosen the same piece, player one will now decide");
-                Controller.DecideNoughtsOrCrosses(playerOne);
+                Cli.DecideNoughtsOrCrosses(playerOne);
                 
                 if (playerOne.CompareTo(playerTwo))
                 {
@@ -71,18 +71,19 @@ namespace TicTacToe_Kata
                 }
             }
             DisplayBoard(Board);
+            //TODO add this to CLI
             Console.Out.WriteLine("Thanks for playing!");
         }
 
         private bool PlayTurn(Player player)
-        {
+        {//TODO add to CLI
             DisplayBoard(Board);
             Console.Out.WriteLine("Please make your move " + player.Name);
 
             bool validMove = false;
             while (!validMove)
             {
-                validMove = ValidateMove(Board, Controller.GetMove(player));
+                validMove = ValidateMove(Board, Cli.GetMove(player));
                 if (validMove == false)
                 {
                     Console.Out.WriteLine("Sorry that is an invalid move, please make sure you are not trying to overwrite a previous move and that the coordinates you have entered are inside the board.");

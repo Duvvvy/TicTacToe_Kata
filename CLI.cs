@@ -7,11 +7,11 @@ using System.Security.AccessControl;
 
 namespace TicTacToe_Kata
 {
-    public class Controller
+    public class CLI
     {
         
 
-        public Controller()
+        public CLI()
         {
             
         }

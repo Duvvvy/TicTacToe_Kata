@@ -20,6 +20,12 @@ namespace TicTacToe_Kata
         public void DecideNoughtsOrCrosses(Player player)
         {
             bool validInput = false;
+
+            if (player.isBot)
+            {
+                player.Type = 1;
+                validInput = true;
+            }
             while (!validInput)
             {
                 Console.Out.WriteLine("Please enter either an \'x\' or and \'o\'");
@@ -62,7 +68,8 @@ namespace TicTacToe_Kata
             
             return new Move(x, y, player.Type);
         }
-        public Move BotMove(Player player)
+
+        private Move BotMove(Player player)
         {//TODO allow multiple board sizes
             int x = Random.Next(0, 3);
             int y = Random.Next(0, 3);
